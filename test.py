@@ -23,7 +23,7 @@ def split_into_threes(text):
 
 class_duration = 45
 
-break_durations = [ 5, 10, 20, 10, 10, 5, 5, 10, 10, 5, 5]
+break_durations = [5, 10, 20, 10, 10, 5, 5, 10, 10, 5, 5]
 
 def class_and_break_time(start_class, end_class):
     if not isinstance(start_class, int) or not isinstance(end_class, int):
@@ -32,11 +32,11 @@ def class_and_break_time(start_class, end_class):
         raise ValueError("Invalid arguments: start_class and end_class must be between 1 and 7 and start_class must be smaller or equal to end_class")
 
     class_time = (end_class - start_class + 1) * class_duration
-    break_time = sum(break_durations[start_class-1:end_class-1])
+    break_time = sum(break_durations[start_class:end_class-1])
 
     return (class_time, break_time)
 
-
+print(class_and_break_time(0,13))
 
 
 
