@@ -20,3 +20,25 @@ def split_into_threes(text):
         return [text[i:i+3] for i in range(0, len(text)-last_string_length, 3)] + [text[-last_string_length:]]
 
 
+def count_vowels_and_consonants(text):
+    if not isinstance(text, str):
+        raise ValueError("Invalid argument: text must be a string")
+    
+    vowels = ['a', 'e', 'i', 'o', 'u', 'á', 'é', 'í', 'ó', 'ú', 'ů', 'ý', 'ě']
+    consonants = ['b', 'c', 'č', 'd', 'ď', 'f', 'g', 'h', 'ch', 'j', 'k', 'l', 'm', 'n', 'ň', 'p', 'r', 'ř', 's', 'š', 't', 'ť', 'v', 'z', 'ž']
+    vowel_count = 0
+    consonant_count = 0
+    
+    for char in text.lower():
+        if char.isalpha():
+            if char in vowels:
+                vowel_count += 1
+            elif char in consonants:
+                consonant_count += 1
+    
+    return {'vowels': vowel_count, 'consonants': consonant_count}
+
+
+
+
+
