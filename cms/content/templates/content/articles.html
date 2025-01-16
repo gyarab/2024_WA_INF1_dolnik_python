@@ -1,0 +1,11 @@
+
+{%extends 'content/base.html'%}
+{%block main%} 
+<h1>Articles</h1>
+        {% for article in data %}
+            <div class="article">
+               
+                <h2><a href="{% url 'content:article' forloop.counter0 %}">{{ article.title }}</a></h2>
+                <p>{{ article.perex }}</p>
+        {% endfor %}
+{% endblock %}
