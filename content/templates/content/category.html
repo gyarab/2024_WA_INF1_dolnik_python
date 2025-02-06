@@ -2,7 +2,7 @@
 
 
 {% block title %}
-    Seznam Clanku
+   Category {{ category.name }}
 {% endblock %}
 
 {% block main %}
@@ -15,4 +15,5 @@
         </strong>
         <p>{{ article.perex }}</p>
     {% endfor %}
+    <a href="{% url 'content:articles' %}">Zpet na seznam</a>
 {% endblock %}
