@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse as HTTPResponse
 from django.urls import reverse
 import json
-from .models import Article, Category
+from .models import Article, Category, Author
 
 # Create your views here.
 def articles(request):
@@ -22,4 +22,10 @@ def category(request, id):
 
     
     return render(request, 'content/category.html', {'category':category, 'articles': articles})
+
+def author(request, id):
+    author = Author.objects.get(id=id)
+    articles = author.articles.all()
+
+    return render(request, 'content/author.html', {'author': author, 'articles': articles})
     

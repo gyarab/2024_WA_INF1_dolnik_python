@@ -9,7 +9,9 @@
     <strong>
         {% for category in article.categories.all %}
             <a href="{%url 'content:category' category.id %}">{{ category.name }}</a>{% if not forloop.last %}, {% endif %}
+            
         {% endfor %}
+        <p>Author: {{ article.author }}</a></p>
     </strong>
 
     <p>{{ article.text }}</p>

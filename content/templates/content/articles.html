@@ -11,7 +11,9 @@
         <strong>
             {% for category in article.categories.all %}
                 {{ category.name }}{% if not forloop.last %}, {% endif %}
+                
             {% endfor %}
+            <p>Author: {{ article.author }}</a></p>
         </strong>
         <p>{{ article.perex }}</p>
     {% endfor %}

@@ -10,7 +10,12 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Author(models.Model):
+    name = models.CharField(max_length=200)
 
+    def __str__(self):
+        return self.name
 
 class Article(models.Model):
     title = models.CharField(max_length=200)
@@ -19,6 +24,7 @@ class Article(models.Model):
     published = models.DateTimeField()
     #category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     categories = models.ManyToManyField(Category, related_name='articles')
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True, related_name='articles')
 
     def __str__(self):
         return self.title
