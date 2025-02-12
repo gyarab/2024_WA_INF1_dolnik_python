@@ -1,31 +1,37 @@
 from django.shortcuts import render
-from django.http import HttpResponse as HTTPResponse
-from django.urls import reverse
-import json
-from .models import Article, Category, Author
+from .models import Game, Category, Author
 
-# Create your views here.
-def articles(request):
-    articles = Article.objects.all()
+def games(request):
+    games = Game.objects.all()
     
-    return render(request, 'content/articles.html', {'articles': articles})
+    return render(request, 'content/games.html', {'games': games})
 
-def article(request, id):
-    article = Article.objects.get(id=id)
+def categories(request):
+    categories = Category.objects.all()
     
-    return render(request, 'content/article.html', {'article': article})
+    return render(request, 'content/categories.html', {'categories': categories})
+
+def game(request, id):
+    game = Game.objects.get(id=id)
+    
+    return render(request, 'content/game.html', {'game': game})
 
 def category(request, id):
     category = Category.objects.get(id=id)
 
-    articles = category.articles.all()
+    games = category.games.all()
 
     
-    return render(request, 'content/category.html', {'category':category, 'articles': articles})
+    return render(request, 'content/category.html', {'category':category, 'games': games})
 
 def author(request, id):
     author = Author.objects.get(id=id)
-    articles = author.articles.all()
+    games = author.games.all()
 
-    return render(request, 'content/author.html', {'author': author, 'articles': articles})
-    
+    return render(request, 'content/author.html', {'author': author, 'games': games})
+
+def homepage(request):
+    games = Game.objects.all()
+    categories = Category.objects.all()
+    authors = Author.objects.all()
+    return render(request, 'content/homepage.html', {'games': games, 'categories': categories, 'authors': authors})

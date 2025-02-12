@@ -1,19 +1,18 @@
 {% extends 'content/base.html' %}
 
-
 {% block title %}
-   Category {{ category.name }}
+    Category {{ category.name }}
 {% endblock %}
 
 {% block main %}
-    {% for article in articles %}
-        <h2><a href="{% url 'content:article' article.id %}">{{ article.title }}</a></h2>
-        <strong>
-            {% for category in article.categories.all %}
-                {{ category.name }}{% if not forloop.last %}, {% endif %}
-            {% endfor %}
-        </strong>
-        <p>{{ article.perex }}</p>
-    {% endfor %}
-    <a href="{% url 'content:articles' %}">Zpet na seznam</a>
+     {% for game in games %}
+          <h2><a href="{% url 'content:game' game.id %}">{{ game.title }}</a></h2>
+          <strong>
+                {% for category in game.category.all %}
+                     {{ category.name }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+          </strong>
+          <p>{{ game.perex }}</p>
+     {% endfor %}
+     
 {% endblock %}

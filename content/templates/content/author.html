@@ -5,11 +5,16 @@
 {% endblock %}
 
 {% block main %}
-     <h1>Articles by {{ author.name }}</h1>
-     {% for article in articles %}
-          <h2><a href="{% url 'content:article' article.id %}">{{ article.title }}</a></h2>
-          <strong>{{ article.author.name }}</strong>
-          <p>{{ article.perex }}</p>
+     <h1>Games by {{ author.name }}</h1>
+     {% for game in games %}
+          <h2><a href="{% url 'content:game' game.id %}">{{ game.title }}</a></h2>
+          <ul>
+               {% for category in game.categories.all %}
+                    <li>{{ category.name }}</li>
+               {% endfor %}
+          </ul>
+         
+          <p>{{ game.perex }}</p>
      {% endfor %}
-     <a href="{% url 'content:articles' %}">Zpet na seznam</a>
+     
 {% endblock %}

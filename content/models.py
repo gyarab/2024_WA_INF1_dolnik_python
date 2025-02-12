@@ -17,14 +17,14 @@ class Author(models.Model):
     def __str__(self):
         return self.name
 
-class Article(models.Model):
+class Game(models.Model):
     title = models.CharField(max_length=200)
     perex = models.TextField()
     text = models.TextField()
     published = models.DateTimeField()
     #category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
-    categories = models.ManyToManyField(Category, related_name='articles')
-    author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True, related_name='articles')
+    categories = models.ManyToManyField(Category, related_name='games')
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True, related_name='games')
 
     def __str__(self):
         return self.title

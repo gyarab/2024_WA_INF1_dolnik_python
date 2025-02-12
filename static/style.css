@@ -26,3 +26,37 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+.window {
+    display: inline-block;
+    width: 30%;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.window:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.homepage_link {
+    display: inline-block;
+    font-size: 18px;
+    color: #ffffff;
+    background-color: #007bff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.homepage_link:hover {
+    background-color: #0056b3;
+    transform: translateY(-5px);
+}

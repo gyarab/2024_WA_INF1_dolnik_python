@@ -1,0 +1,44 @@
+{% extends 'content/base.html' %}
+
+{% block title %}
+    Úvodní stránka
+{% endblock %}
+{% block main %}
+    
+        {% for game in games|slice:":3" %}
+            <element class="window">
+                <h2><a href="{% url 'content:game' game.id %}">{{ game.title }}</a></h2>
+                <strong>
+                    {% for category in game.categories.all %}
+                        {{ category.name }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                    <p>Author: {{ game.author }}</p>
+                </strong>
+                <p>{{ game.perex }}</p>
+            </element>
+        {% endfor %}
+        <br>
+            {% for category in categories|slice:":3" %}
+                <element class="window">
+                    <h2><a href="{% url 'content:category' category.id %}">{{ category.name }}</a></h2>
+                    
+                </element>
+            {% endfor %}
+            <br>
+            {% for author in authors|slice:":3" %}
+                <element class="window">
+                    <h2><a href="{% url 'content:author' author.id %}">{{ author.name }}</a></h2>
+                    <strong>
+                        <p>Description: {{ author.description }}</p>
+                        
+                       
+                            {% for game in author.games.all|slice:":3" %}
+                              <a href="{% url 'content:game' game.id %}">{{ game.title }}</a>
+                            {% endfor %}
+                       
+                    </strong>
+                </element>
+            {% endfor %}
+{% endblock %}
+
+

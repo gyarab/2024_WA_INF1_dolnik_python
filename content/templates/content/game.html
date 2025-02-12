@@ -1,0 +1,20 @@
+{% extends 'content/base.html' %}
+
+{% block title %}
+    {{ game.title }}
+{% endblock %}
+
+{% block main %}
+    <p>{{ game.perex }}</p>
+    <strong>
+        {% for category in game.categories.all %}
+            <a href="{% url 'content:category' category.id %}">{{ category.name }}</a>{% if not forloop.last %}, {% endif %}
+            
+        {% endfor %}
+    </strong>
+    <p>Author: <a href="{% url 'content:author' game.author.id %}">{{ game.author }}</a></p>
+
+    <p>{{ game.text }}</p>
+
+    
+{% endblock %}

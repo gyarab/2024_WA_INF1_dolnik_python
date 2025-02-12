@@ -7,11 +7,17 @@
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 </head>
 <body>
+    <nav>
+       
+         <a href="{% url 'content:games' %}">Games</a>
+           <a href="{% url 'content:categories' %}">Categories</a>
+    </nav>
     <h1>{% block title %}{% endblock %}</h1>
     <main>
         {% block main %}
         {% endblock %}
     </main>
+    
     {% include 'content/footer.html' %}
 </body>
 </html>

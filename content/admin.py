@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Article, Category, Author
+from .models import Game, Category, Author
 
 
-class ArticleAdmin(admin.ModelAdmin):
+class GameAdmin(admin.ModelAdmin):
     list_display = ['id', 'title']
     list_display_links = ['id', 'title']
     #list_filter = ['category']
@@ -10,6 +10,6 @@ class ArticleAdmin(admin.ModelAdmin):
     search_fields = ['title', 'perex', 'text']
 
 # Register your models here.
-admin.site.register(Article, ArticleAdmin)
+admin.site.register(Game,GameAdmin)
 admin.site.register(Category)
 admin.site.register(Author)
