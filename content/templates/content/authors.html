@@ -2,13 +2,13 @@
 
 
 {% block title %}
-    Seznam Kategorií
+    Seznam Autorů
 {% endblock %}
 
 {% block main %}
-    {% for category in categories %}
+    {% for author in authors %}
     <element class="window">
-        <h2><a href="{% url 'content:category' category.id %}">{{category.name }}</a></h2>
+        <h2><a href="{% url 'content:author' author.id %}">{{author.name }}</a></h2>
     </element>   
     
        

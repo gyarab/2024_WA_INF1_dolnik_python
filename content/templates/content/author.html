@@ -8,11 +8,11 @@
      <h1>Games by {{ author.name }}</h1>
      {% for game in games %}
           <h2><a href="{% url 'content:game' game.id %}">{{ game.title }}</a></h2>
-          <ul>
+          
                {% for category in game.categories.all %}
-                    <li>{{ category.name }}</li>
+                  {{ category.name }}
                {% endfor %}
-          </ul>
+          
          
           <p>{{ game.perex }}</p>
      {% endfor %}

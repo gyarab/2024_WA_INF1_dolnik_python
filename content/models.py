@@ -9,13 +9,13 @@ class Category(models.Model):
         verbose_name_plural = "Categories"
 
     def __str__(self):
-        return self.name
+        return str(self.name)
     
 class Author(models.Model):
     name = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 class Game(models.Model):
     title = models.CharField(max_length=200)
@@ -27,4 +27,4 @@ class Game(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True, related_name='games')
 
     def __str__(self):
-        return self.title
+        return str(self.title)

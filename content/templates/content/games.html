@@ -7,6 +7,7 @@
 
 {% block main %}
     {% for game in games %}
+    <element class="window">
     <h2><a href="{% url 'content:game' game.id %}">{{game.title }}</a></h2>
     <strong>
         {% for category in game.categories.all %}
@@ -16,5 +17,6 @@
         <p>Author: {{ game.author }}</a></p>
     </strong>
     <p>{{ game.perex }}</p>
+    </element>
     {% endfor %}
 {% endblock %}

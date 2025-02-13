@@ -29,7 +29,7 @@
                 <element class="window">
                     <h2><a href="{% url 'content:author' author.id %}">{{ author.name }}</a></h2>
                     <strong>
-                        <p>Description: {{ author.description }}</p>
+                        <p>Games: {{ author.description }}</p>
                         
                        
                             {% for game in author.games.all|slice:":3" %}
