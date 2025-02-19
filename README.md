@@ -1,3 +1,16 @@
 # 2024_WA_INF1_dolnik_python
 ## Django projekt do předmětu Webových aplikací
-### Tento projekt je různých her a jejich autorů
+
+### Popis projektu
+Tento projekt je sbírka různých her a autorů. V rámci tohoto projektu jsou hry, ke kterým jsou přidělené kategorie a autoři. 
+
+### Funkcionalita
+- **Hry**: U každé hry je možné si rozkliknout její detail, kde se zobrazí informace o kategoriích, do kterých hra patří, a o autorovi, který hru vytvořil.
+- **Autoři**: U každého autora je možné si rozkliknout jeho profil, kde se zobrazí seznam všech her, které tento autor vytvořil.
+- **Kategorie**: U každé kategorie je možné si rozkliknout její detail, kde se zobrazí seznam všech her, které do této kategorie patří.
+
+### Technologie
+Projekt je vytvořen pomocí frameworku Django, který umožňuje snadnou správu databází a vytváření webových aplikací. Pro správu závislostí je použit nástroj pip.
+
+### Použití
+Po spuštění serveru můžete přistupovat k aplikaci ve vašem webovém prohlížeči na adrese `http://127.0.0.1:8000/`. Zde můžete procházet hry, autory a kategorie podle výše uvedené funkcionality.
