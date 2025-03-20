@@ -1,11 +1,38 @@
 from django.shortcuts import render
-from .models import Game, Category, Author
+from .models import Game, Category, Author, Comment
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from .forms import CommentForm
+
 
 
 def game(request, id):
     game = Game.objects.get(id=id)
-    
-    return render(request, 'content/game.html', {'game': game})
+    form = CommentForm()
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            data=form.cleaned_data
+            comment = Comment()
+            comment.name = data['name']
+            comment.text = data['text']
+            comment.game = game
+            comment.ip = request.META.get('REMOTE_ADDR')
+            comment.user_agent = request.META.get('HTTP_USER_AGENT')
+            comment.save()
+            return HttpResponseRedirect(reverse('content:game', args=[id]))
+    if request.method == 'GET':
+      
+        if 'voted_games' not in request.COOKIES:
+            game.votes_sum += int(request.GET.get('vote', 0))
+            game.votes_count += 1
+            game.save()
+            response = HttpResponseRedirect(reverse('content:game', args=[id]))
+            response.set_cookie('voted_games', str(game.id))
+            return response
+        game.save()
+
+    return render(request, 'content/game.html', {'game': game, 'form': form})
 
 def games(request):
     games = Game.objects.all()

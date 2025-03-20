@@ -1,20 +1,48 @@
 {% extends 'content/base.html' %}
 
 {% block title %}
-    {{ game.title }}
+{{ game.title }}
 {% endblock %}
 
 {% block main %}
-    <p>{{ game.perex }}</p>
-    <strong>
-        {% for category in game.categories.all %}
-            <a href="{% url 'content:category' category.id %}">{{ category.name }}</a>{% if not forloop.last %}, {% endif %}
-            
-        {% endfor %}
-    </strong>
-    <p>Author: <a href="{% url 'content:author' game.author.id %}">{{ game.author }}</a></p>
+<p>{{ game.perex }}</p>
+<strong>
+    {% for category in game.categories.all %}
+    <a href="{% url 'content:category' category.id %}">{{ category.name }}</a>{% if not forloop.last %}, {% endif %}
 
-    <p>{{ game.text }}</p>
+    {% endfor %}
+</strong>
+<p>Author: <a href="{% url 'content:author' game.author.id %}">{{ game.author }}</a></p>
 
+<p>{{ game.text }}</p>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+<div class="vote">
+    <h3>Rate this game:</h3>
+    <form action="" method="GET">
+        <input type="submit" name="vote" value="1">
+ 
+        <input type="submit" name="vote" value="2">
+
+        <input type="submit" name="vote" value="3">
     
-{% endblock %}
+        <input type="submit" name="vote" value="4">
+    
+        <input type="submit" name="vote" value="5">
+       
+    </form>
+</div>
+<ul>
+    {% for comment in game.comments.all %}
+    <div class="comment">
+    <strong>{{ comment.name }}</strong>
+    <p>{{ comment.text }}</p>
+    </div>
+    {% endfor %}
+
+
+    {% endblock %}
