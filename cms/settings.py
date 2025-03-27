@@ -26,6 +26,7 @@ SECRET_KEY = 'django-insecure-2$h#$zb(oaq%r*v4m27m2c+%5)4=3*-2zfcqavcu5l-18&&=vc
 DEBUG = True
 
 ALLOWED_HOSTS = ['dolnik.svs.gyarab.cz', '127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['dolnik.svs.gyarab.cz', '127.0.0.1']
 
 
 # Application definition
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'content.apps.ContentConfig', 
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -48,8 +50,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+
 ]
 
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 ROOT_URLCONF = 'cms.urls'
 
 TEMPLATES = [
@@ -116,7 +123,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
@@ -126,3 +133,4 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
