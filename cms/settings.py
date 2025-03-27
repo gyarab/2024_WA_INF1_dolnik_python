@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-2$h#$zb(oaq%r*v4m27m2c+%5)4=3*-2zfcqavcu5l-18&&=vc
 DEBUG = False
 
 ALLOWED_HOSTS = ['dolnik.svs.gyarab.cz', '127.0.0.1']
-CSRF_TRUSTED_ORIGINS = ['dolnik.svs.gyarab.cz', '127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://dolnik.svs.gyarab.cz/']
 
 
 # Application definition
