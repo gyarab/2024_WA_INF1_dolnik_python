@@ -26,6 +26,7 @@ class Game(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True, related_name='games')
     votes_sum=models.IntegerField(default=0)
     votes_count=models.IntegerField(default=0)
+    image = models.ImageField(upload_to='games/image', null=True, blank=True)
 
     def __str__(self):
         return str(self.title)
