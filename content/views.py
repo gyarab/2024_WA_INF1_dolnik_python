@@ -2,7 +2,8 @@ from django.shortcuts import render
 from .models import Game, Category, Author, Comment
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .forms import CommentForm
+from .forms import CommentForm, LoginForm
+from django.contrib.auth import authenticate, login
 
 
 
@@ -70,3 +71,22 @@ def homepage(request):
     categories = Category.objects.all()
     authors = Author.objects.all()
     return render(request, 'content/homepage.html', {'games': games, 'categories': categories, 'authors': authors})
+
+def login_view(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return HttpResponseRedirect(reverse('my_app:login'))
+            else:
+                form.add_error(None, 'Invalid login credentials')
+    else:
+        form = LoginForm()
+    return render(request, 'my_app/login.html', {'form': form, 'user': request.user})
+    
+
+    

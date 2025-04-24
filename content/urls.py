@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import games, game, category, author, categories, homepage, authors
+from .views import games, game, category, author, categories, homepage, authors, login
 
 app_name = 'content'
 
@@ -11,4 +11,5 @@ urlpatterns = [
     path('categories/', categories, name='categories'),
     path('author/<int:id>/', author, name='author'),
     path('authors/', authors, name='authors'),
+    path('login/', login, name='login'),
 ]
