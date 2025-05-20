@@ -2,9 +2,12 @@ from django.shortcuts import render
 from .models import Game, Category, Author, Comment
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .forms import CommentForm, LoginForm
-from django.contrib.auth import authenticate, login
-
+from .forms import CommentForm, LoginForm, RegistrationForm
+from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth.models import User
+from django.contrib.auth import logout
+from django.views.decorators.http import require_POST
+from django.shortcuts import redirect
 
 
 def game(request, id):
@@ -15,7 +18,10 @@ def game(request, id):
         if form.is_valid():
             data=form.cleaned_data
             comment = Comment()
-            comment.name = data['name']
+            if request.user.is_authenticated:
+                comment.name = request.user.username
+            else:
+                comment.name = data['name']
             comment.text = data['text']
             comment.game = game
             comment.ip = request.META.get('REMOTE_ADDR')
@@ -80,13 +86,33 @@ def login_view(request):
             password = form.cleaned_data['password']
             user = authenticate(request, username=username, password=password)
             if user is not None:
-                login(request, user)
-                return HttpResponseRedirect(reverse('my_app:login'))
+                auth_login(request, user)
+                return HttpResponseRedirect(reverse('content:homepage'))
             else:
                 form.add_error(None, 'Invalid login credentials')
     else:
         form = LoginForm()
-    return render(request, 'my_app/login.html', {'form': form, 'user': request.user})
-    
+    return render(request, 'content/login.html', {'form': form})
 
+
+def register(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            email = form.cleaned_data['email']
+            user = User.objects.create_user(username=username, password=password, email=email)
+            user.save()
+            return HttpResponseRedirect(reverse('content:login'))
+    else:
+        form = RegistrationForm()
+    return render(request, 'content/register.html', {'form': form})
+
+
+
+@require_POST
+def logout_view(request):
+    logout(request)
+    return redirect('/')
     

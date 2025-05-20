@@ -1,0 +1,24 @@
+{% extends 'content/base.html' %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block main %}
+    <form action="{% url 'content:login' %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Login">
+    </form>
+    <hr>
+   <a href="{% url 'social:begin' 'google-oauth2' %}">Log in with Google</a>
+
+  {% if user.is_authenticated %}
+  <form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+  </form>
+{% endif %}
+   
+
+{% endblock %}

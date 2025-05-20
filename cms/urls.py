@@ -23,6 +23,7 @@ from debug_toolbar.toolbar import debug_toolbar_urls
 import content.urls
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
 
 
 
@@ -30,6 +31,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', include('content.urls')),
     path('admin/', admin.site.urls),
+    path('auth/', include('social_django.urls', namespace='social')),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 ] + debug_toolbar_urls()
 
 if settings.DEBUG:

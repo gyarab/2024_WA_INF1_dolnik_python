@@ -8,11 +8,17 @@
 </head>
 <body>
     <nav>
-       
+    {% if user.is_authenticated %}
+        <span>Logged in as {{ user.username }}</span>
+    {% endif %}
         <a href="{% url 'content:games' %}">Games</a>
         <a href="{% url 'content:categories' %}">Categories</a>
         <a href="{% url 'content:authors' %}">Authors</a>
+        <a href="{% url 'content:register' %}">Register</a>
         <a href="{% url 'content:login' %}">Login</a>
+    
+        
+
     </nav>
     <h1>{% block title %}{% endblock %}</h1>
     <main>

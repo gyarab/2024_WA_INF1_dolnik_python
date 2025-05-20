@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,6 +30,34 @@ ALLOWED_HOSTS = ['dolnik.svs.gyarab.cz', '127.0.0.1']
 CSRF_TRUSTED_ORIGINS = ['https://dolnik.svs.gyarab.cz', 'http://localhost:8000']
 CSRF_COOKIE_SECURE = True
 
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config('GOOGLE_CLIENT_ID')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config('GOOGLE_CLIENT_SECRET')
+def associate_by_email(strategy, details, user=None, *args, **kwargs):
+    if user:
+        return
+
+    email = details.get('email')
+    if not email:
+        return
+
+    # Pokus najít uživatele podle emailu, pokud není připojený Google účet
+    user = strategy.storage.user.get_user(email=email)
+    if user:
+        return {'user': user}
+
+
+
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL_ALLOWED_METHODS = ["GET", "POST"]
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,6 +66,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'social_django',
     'django.contrib.staticfiles',
     'content.apps.ContentConfig', 
     'debug_toolbar',
