@@ -4,4 +4,4 @@ psycopg
 django-debug-toolbar
 pillow
 social-auth-app-django
-decouple
+python-decouple
